@@ -76,7 +76,7 @@ public class SupplyTest {
 		boolean validRemovel2 = supply.remove("triangle", 1);
 		boolean invalidRemoval = supply.remove("circle", 800);
 		
-		assertTrue
+		assertTrue("the removal from cube is valid", 
 		
 	}
 	

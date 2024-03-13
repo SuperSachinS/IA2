@@ -17,9 +17,13 @@ public class SupplyItemTest {
 	1 remove test
 	*/
 	
+	@Before
+	public void setUp(){
+		expectedSupplyItem = new SupplyItem("block", 100);
+	}
+	
 	@Test
 	public void testCreateSupplyItemConstructorNonDietary(){
-		expectedSupplyItem = new SupplyItem("block", 100);
 		String type = expectedSupplyItem.getType();
 		int quantity = expectedSupplyItem.getQuantity();
 		
@@ -29,7 +33,7 @@ public class SupplyItemTest {
 	
 	@Test
 	public void testCreateSupplyItemConstructorDietary(){
-		ArrayList<String> dietaryCodes = new ArrayList<String>;
+		ArrayList<String> dietaryCodes = new ArrayList<String>();
 		dietaryCodes.add("AVML");
 		dietaryCodes.add("DBML");
 		expectedSupplyItem = new SupplyItem("cube", 101, dietaryCodes);
@@ -40,11 +44,17 @@ public class SupplyItemTest {
 		
 		assertEquals("Type should be: cube", "cube", type);
 		assertEquals("Amount should be 101", 101, quantity);
-		assertEquals("Dietary codes should be: AVML and DBML", dietaryCodes, testedDietaryCodes);		
+		
+		boolean correct = true;
+		for (i = 0; i < testedDietaryCodes.size(); i++){
+			if (dietaryCodes.get(i) != testedDietaryCodes.get(i)){
+				correct = false;
+			}
+		}
+		assertTrue("Dietary codes should be: AVML and DBML", correct);		
 	}
 	@Test 
 	public void testSetQuantity(){
-		expectedSupplyItem = new SupplyItem("block", 100);
 		expectedSupplyItem.setQuantity(50);
 		
 		int quantity = expectedSupplyItem.getQuantity();
@@ -52,22 +62,25 @@ public class SupplyItemTest {
 	}
 	@Test
 	public void testSetDietaryCodes(){
-		ArrayList<String> dietaryCodes = new ArrayList<String>;
+		ArrayList<String> dietaryCodes = new ArrayList<String>();
 		dietaryCodes.add("AVML");
 		dietaryCodes.add("DBML");
 		expectedSupplyItem = new SupplyItem("cube", 101, dietaryCodes);
-		
-		ArrayList<String> newDietaryCodes = new ArrayList<String>;
+		ArrayList<String> newDietaryCodes = new ArrayList<String>();
 		dietaryCodes.add("GFML");
 		dietaryCodes.add("VJML");
 		
 		ArrayList<String> testedDietaryCodes = expectedSupplyItem.getDietaryCode();
-		
-		assertEquals("Dietary codes should be: GFML and VJML", newDietaryCodes, testedDietaryCodes);		
+		boolean correct = true;
+		for (i = 0; i < testedDietaryCodes.size(); i++){
+			if (newDietaryCodes.get(i) != testedDietaryCodes.get(i)){
+				correct = false;
+			}
+		}
+		assertTrue("Dietary codes should be set to the new codes GFML and VJML", correct);		
 	}
 	@Test
 	public void testAddQuantity(){
-		expectedSupplyItem = new SupplyItem("block", 100);
 		expectedSupplyItem.addQuantity(50);
 		
 		int quantity = expectedSupplyItem.getQuantity();
@@ -77,7 +90,6 @@ public class SupplyItemTest {
 	
 	@Test
 	public void testAddDietaryCode(){
-		expectedSupplyItem = new SupplyItem("block", 100);
 		
 		expectedSupplyItem.addDietaryCode("GFML");
 		String dietaryCodes = expectedSupplyItem.getDietaryCode();
@@ -86,7 +98,7 @@ public class SupplyItemTest {
 	}
 	@Test
 	public void testRemoveDietaryCode(){
-		ArrayList<String> dietaryCodes = new ArrayList<String>;
+		ArrayList<String> dietaryCodes = new ArrayList<String>();
 		dietaryCodes.add("AVML");
 		dietaryCodes.add("DBML");
 		expectedSupplyItem = new SupplyItem("cube", 101, dietaryCodes);

@@ -250,17 +250,20 @@ public class DisasterVictimTest {
 		MedicalRecord testRecord = new MedicalRecord(testLocation, "test for strep", "2024-02-09");
 		boolean correct = true;
 
-		MedicalRecord[] newRecords = { testRecord };
+		ArrayList<MedicalRecord> newRecords = new ArrayList<>();
+		newRecords.add(testRecord);
 		victim.setMedicalRecords(newRecords);
-		MedicalRecord[] actualRecords = victim.getMedicalRecords();
+		ArrayList<MedicalRecord> actualRecords = victim.getMedicalRecords();
 
+
+		boolean correct = true;
 		// We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
-		if (newRecords.length != actualRecords.length) {
+		if (newRecords.size() != actualRecords.size()) {
 			correct = false;
 		} else {
 			int i;
-			for (i=0;i<newRecords.length;i++) {
-				if (actualRecords[i] != newRecords[i]) {
+			for (i=0;i<newRecords.size();i++) {
+				if (actualRecords.get(i) != newRecords.get(i)) {
 					correct = false;
 				}
 			}
@@ -271,25 +274,32 @@ public class DisasterVictimTest {
 
 	@Test
 	public void testSetPersonalBelongings() {
-		Supply one = new Supply("Tent", 1);
-		Supply two = new Supply("Jug", 3);
-		Supply[] newSupplies = {one, two};
+		ArrayList<SupplyItem> expectedSupplies = new ArrayList<>();
+		expectedSupplies.add(new SupplyItem("Tent", 1));
+		expectedSupplies.add(new SupplyItem("Jug", 3));
+		Supply expectedSupply = new supply();
+		expectedSupply.setSupplies(expectedSupplies);
+		victim.setPersonalBelongings(expectedSupply);
+		
+		Supply testedSupply = victim.getPersonalBelongings();
+		
+		
+		ArrayList<SupplyItem> testedSupplies = testedSupply.getSupplies();
+		
+		
 		boolean correct = true;
-
-		victim.setPersonalBelongings(newSupplies);
-		Supply[] actualSupplies = victim.getPersonalBelongings();
-
-		// We have not studied overriding equals in arrays of custom objects so we will manually evaluate equality
-		if (newSupplies.length != actualSupplies.length) {
+		
+		if (testedSupplies.size() != expectedSupplies.size()){
 			correct = false;
-		} else {
-			int i;
-			for (i=0;i<newSupplies.length;i++) {
-				if (actualSupplies[i] != newSupplies[i]) {
+		}
+		else{
+			for (int i = 0; i < testedSupplies.size(); i++){
+				if(testedSupplies.get(i).getType() != expectedSupplies.get(i).getType() && testedSupplies.get(i).getQuantity() != expectedSupplies.get(i).getQuantity()){
 					correct = false;
 				}
 			}
 		}
+
 		assertTrue("setPersonalBelongings should correctly update personal belongings", correct);
 	}
 

@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class DisasterVictimTest {
     private DisasterVictim victim;
     private Supply suppliesToSet; 
-    private List<FamilyRelation> familyRelations; 
+    private FamilyRelation familyRelations; 
     private String expectedFirstName = "Freda";
     private String EXPECTED_ENTRY_DATE = "2024-01-18";
     private String validDate = "2024-01-15";
@@ -122,9 +122,10 @@ public class DisasterVictimTest {
 
     @Test
     public void testAddFamilyConnection() {
-        DisasterVictim victim1 = new DisasterVictim("Jane", "2024-01-20");
-        DisasterVictim victim2 = new DisasterVictim("John", "2024-01-22");
-
+        DisasterVictim victim3 = new DisasterVictim("Jim", "2024-01-22");
+		
+		victim1.add
+		
         FamilyRelation relation = new FamilyRelation(victim2, "parent", victim1);
         FamilyRelation[] expectedRelations = {relation};
         victim2.setFamilyConnections(expectedRelations);

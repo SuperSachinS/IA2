@@ -14,7 +14,7 @@ public class FamilyRelationTest {
 	
 	@Before
 	public void setUp(){
-		relativestoSet = new ArrayList<>();
+		relativesToSet = new ArrayList<>();
 		victim = new DisasterVictim("John", "2024-01-15");
 		familyRelation = new FamilyRelation(victim);
 		relation = new ArrayList<>();
@@ -33,14 +33,14 @@ public class FamilyRelationTest {
 	@Test
 	public void testSetRelative(){
 		ArrayList<DisasterVictim> testedRelatives = familyRelation.getRelatives();
-		AssertEquals("The set relatives function should properly fill the relatives attribute", testedRelatives.get(0), relativesToSet.get(0));	
-		AssertEquals("The set relatives function should properly fill the relatives attribute", testedRelatives.get(1), relativesToSet.get(1));
+		assertEquals("The set relatives function should properly fill the relatives attribute", testedRelatives.get(0), relativesToSet.get(0));	
+		assertEquals("The set relatives function should properly fill the relatives attribute", testedRelatives.get(1), relativesToSet.get(1));
 	}
 	
 	@Test public void testSetRelation(){
 		ArrayList<String> testedRelations = familyRelation.getRelations();
-		AssertEquals("the setRelations function should properly fill the relations attribute", testedRelations.get(0), relations.get(0));
-		AssertEquals("the setRelations function should properly fill the relations attribute", testedRelations.get(1), relations.get(1));	
+		assertEquals("the setRelations function should properly fill the relations attribute", testedRelations.get(0), relations.get(0));
+		assertEquals("the setRelations function should properly fill the relations attribute", testedRelations.get(1), relations.get(1));	
 	}
 	
 	
@@ -55,12 +55,12 @@ public class FamilyRelationTest {
 		ArrayList<DisasterVictim> testedRelatives = familyRelation.getRelatives();
 		ArrayList<String> testedRelations = familyRelation.getRelations();
 
-		AssertEquals("existing relatives should not be overwritten", testedRelatives.get(0), relativesToSet.get(0));
-		AssertEquals("existing relations should not be overwritten", testedRelations.get(0), relation.get(0));
-		AssertEquals("existing relatives should not be overwritten", testedRelatives.get(1), relativesToSet.get(1));
-		AssertEquals("existing relations should not be overwritten", testedRelations.get(1), relation.get(1));
-		AssertEquals("new relatives should be added to the array", testedRelatives.get(2), newPerson);
-		AssertEquals("new relations should be added to the array", testedRelations.get(2), newRelation));
+		assertEquals("existing relatives should not be overwritten", testedRelatives.get(0), relativesToSet.get(0));
+		assertEquals("existing relations should not be overwritten", testedRelations.get(0), relation.get(0));
+		assertEquals("existing relatives should not be overwritten", testedRelatives.get(1), relativesToSet.get(1));
+		assertEquals("existing relations should not be overwritten", testedRelations.get(1), relation.get(1));
+		assertEquals("new relatives should be added to the array", testedRelatives.get(2), newPerson);
+		assertEquals("new relations should be added to the array", testedRelations.get(2), newRelation));
 	}
 	
 	@Test
@@ -84,12 +84,12 @@ public class FamilyRelationTest {
 				break;
 			}
 		}
-		AssertTrue("RemoveRelative should remove the relative and its corresponding relation", correct);
+		assertTrue("RemoveRelative should remove the relative and its corresponding relation", correct);
 	}
 	
 	
 	@Test
 	public void testGetPerson(){
-		AssertEquals("Get person should return the person field", familyRelation.getPerson(), victim);
+		assertEquals("Get person should return the person field", familyRelation.getPerson(), victim);
 	}
 }

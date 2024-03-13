@@ -27,8 +27,8 @@ public class MedicalRecordTest {
 
 
     @Test
-    public void testObjectCreation() {
-        assertNotNull(medicalRecord);
+    public void testMedicalRecordObjectCreation() {
+        assertNotNull("The MedicalRecord constructor should create an instance of MedicalRecord"medicalRecord);
     }	
 	
     @Test

@@ -115,7 +115,9 @@ public class SupplyTest {
 
         assertEquals("getSupply should return the expected supply item", supplyItems.get(0), newSupplyItems.get(0));
     }
-	
+	/**
+     * Test for adding supplyitems to supply without a dietary code
+     */
 	@Test
 	public void testAddSupplyWithNoDietaryCode(){
 
@@ -127,7 +129,9 @@ public class SupplyTest {
 		assertEquals("addSupply should add the new supplyitem to its arraylist", newSupplyItem.getQuantity(), 50);
 		
 	}
-	
+	/**
+     * Test for adding supplyitems to supply with a dietary code
+     */
 	@Test
 	public void testAddSupplyWithDietaryCode(){
 		supply.addSupply("cylinder", 50, "GFML");

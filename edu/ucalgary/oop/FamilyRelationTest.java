@@ -53,6 +53,19 @@ public class FamilyRelationTest {
         assertEquals("the setRelations function should properly fill the relations attribute", testedRelations.get(0), relation.get(0));
         assertEquals("the setRelations function should properly fill the relations attribute", testedRelations.get(1), relation.get(1));
     }
+	
+	
+	/**
+     * Test for seeing if the familyRelation class refers to the Enumeration for valid relation keys
+	 * It should throw an illegalargumentexception if its invalid
+     */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetRelationWithInvalidRelations(){
+		ArrayList<String> badRelations = new ArrayList<>();
+		badRelations.add("Hero");
+		familyRelation.setRelations(badRelations);
+		//expecting an Illegal Argument Exception
+	}
 
     /**
      * Test for adding a relative.
@@ -74,6 +87,23 @@ public class FamilyRelationTest {
         assertEquals("new relatives should be added to the array", testedRelatives.get(2), newPerson);
         assertEquals("new relations should be added to the array", testedRelations.get(2), newRelation);
     }
+
+
+
+    /**
+	 * Test for seeing if the familyRelation class refers to the Enumeration for valid relation keys
+	 * It should throw an illegalargumentexception if its invalid
+     */
+	@Test(expected = IllegalArgumentException.class)
+	public void testAddRelativeWithInvalidRelation(){
+		DisasterVictim newPerson = new DisasterVictim("Jim", "2024-01-18");
+        
+		String newRelation = "pet";
+		
+		familyRelation.addRelative(newPerson, newRelation);
+		//expecting an Illegal Argument Exception
+		
+	}
 
     /**
      * Test for removing a relative.

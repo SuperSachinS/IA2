@@ -22,7 +22,7 @@ public class LocationTest {
         // Initializing test objects before each test method
         location = new Location("Shelter A", "1234 Shelter Ave");
         victim = new DisasterVictim("John Doe", "2024-01-01");
-        supply = new Supply("Water Bottle", 10);
+        supply = new Supply();
         supplyItems = new ArrayList<>();
 
         supplyItems.add(new SupplyItem("cube", 100));
@@ -30,11 +30,6 @@ public class LocationTest {
         supplyItems.add(new SupplyItem("circle", 400));
 
         supply.setSupplies(supplyItems);
-    }
-
-    // Helper method to check if a supply is in the list
-    private boolean containsSupply(ArrayList<Supply> supplies, Supply supplyToCheck) {
-        return supplies.contains(supplyToCheck);
     }
 
     /**
@@ -102,10 +97,8 @@ public class LocationTest {
      */
     @Test
     public void testSetAndGetSupplies() {
-        Supply newSupplies = new Supply();
-        newSupplies.add(new SupplyItem("cylinder", 50));
-        location.setSupplies(newSupplies);
-        assertEquals("setSupplies should replace the supplies list with the new list", newSupplies, location.getSupplies());
+        location.setSupplies(supply);
+        assertEquals("setSupplies should replace the supplies list with the new list", supply, location.getSupplies());
     }
 
     /**
@@ -137,6 +130,8 @@ public class LocationTest {
      */
     @Test
     public void testSendSupplies() {
+		location.setSupplies(supply);
+		
         Location destinationLocation = new Location("Shelter B", "4321 home ST");
         SupplyItem supplyToSend = new SupplyItem("cube", 50);
 
@@ -156,6 +151,7 @@ public class LocationTest {
      */
     @Test
     public void testDistributeSupplies() {
+		location.setSupplies(supply);
         location.distributeSupplies("cube", 50, victim);
         Supply personalBelongings = victim.getPersonalBelongings();
         SupplyItem personalSupply = personalBelongings.getSupply("cube");

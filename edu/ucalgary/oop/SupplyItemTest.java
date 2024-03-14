@@ -133,14 +133,12 @@ public class SupplyItemTest {
 
     /**
      * Test for seeing that SupplyItem references the enumeration DietaryCodes
-	 * In correct behavior invalid dietaryCodes would be rejected/ignored
+	 * In correct behavior invalid dietaryCodes would be rejected and throw an illegal argument exception
      */
-	@Test
+	@Test(expected = IllegalArgumentException.class)
 	public void testEnumerationInvalidDietaryCode(){
 		SupplyItem invalidSupplyItem = new SupplyItem("car", 5, "ABCD");
-		ArrayList<String> testedDietaryCodes = invalidSupplyItem.getDietaryCode();
-		
-		AssertNull("SupplyItem should not assign invalid dietary codes based on the enumeration", testedDietaryCodes);
+		//expecting an illegal arguement exception
 	}
 
 }

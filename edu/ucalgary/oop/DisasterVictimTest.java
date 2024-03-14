@@ -31,6 +31,7 @@ public class DisasterVictimTest {
     @Before
     public void setUp() {
         victim = new DisasterVictim(expectedFirstName, EXPECTED_ENTRY_DATE);
+		victim.setUseDateOfBirth(true);
         suppliesToSet = new ArrayList<>();
         suppliesToSet.add(new SupplyItem("Water Bottle", 10));
         suppliesToSet.add(new SupplyItem("Blanket", 5));
@@ -46,9 +47,10 @@ public class DisasterVictimTest {
     @Test
     public void testConstructorWithValidEntryDate() {
         String validEntryDate = "2024-01-18";
-        DisasterVictim victim = new DisasterVictim("Freda", validEntryDate);
-        assertNotNull("Constructor should successfully create an instance with a valid entry date", victim);
-        assertEquals("Constructor should set the entry date correctly", validEntryDate, victim.getEntryDate());
+        DisasterVictim validVictim = new DisasterVictim("Freda", validEntryDate);
+        assertNotNull("Constructor should successfully create an instance with a valid entry date", validVictim);
+        assertEquals("Constructor should set the entry date correctly", validEntryDate, validVictim.getEntryDate());
+		assertEquals("constructor should set the firstName correctly", "Freda", validVictim.getFirstName());
     }
 
     /**
@@ -76,10 +78,82 @@ public class DisasterVictimTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testSetDateOfBirthWithInvalidFormat() {
+		
         victim.setDateOfBirth(invalidDate); // This format should cause an exception
     }
 	
+	
+    /**
+     * Tests using the setDateOfBirth while using approximate age.
+     */
+	@Test(expected = IllegalArgumentException.class)
+    public void testSetDateOfBirthWhileUsingApproximateAge() {
+		victim.setUseDateOfBirth(false);
+		victim.setApproximateAge(45);
+		
+		String newDateOfBirth = "1987-05-21";
+        victim.setDateOfBirth(newDateOfBirth);
+		// Expecting an illegal argument exception
+    }
+	
+	
+    /**
+     * Tests that dateOfBirth is set to null after switching to using approximate age
+     */
+	@Test
+	public void testDateOfBirthIsNullWhileApproximateAgeIsNotNull(){
+		victim.setUseDateOfBirth(false);
+		assertNull("cannot use both birthdate and approximate age at the same time", victim.getDateOfBirth());
+	}
 
+
+    /**
+     * Tests that setapproximateage properly update approximate age
+     */
+	@Test
+	public void testSetApproximateAge(){
+		victim.setUseDateOfBirth(false);
+		victim.setApproximateAge(45);
+		
+		assertEquals("setApproximateage should update the associate field", 45, victim.getApproximateAge());
+	}
+
+	/**
+     * Tests that setapproximateage only allows valid age values
+	 * expects an illegal argument exception
+     */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetApproximateAgeWithInvalidInput(){
+		victim.setUseDateOfBirth(false);
+		victim.setApproximateAge(-20);
+		//expecting an illegal argument exception
+	}
+
+
+
+	/**
+     * Tests that setapproximateage only allows for input while not using dateOfBirth
+	 * expects an illegal argument exception
+     */
+	@Test (expected = IllegalArgumentException.class)
+	public void testSetApproximateAgeWhileUsingDateOfBirth(){
+		victim.setApproximateAge(40);
+		//Expecting an illegal argument exception
+	}
+
+    /**
+     * Tests that approximateAge is set to null after switching to using dateOfBirth
+     */
+	@Test
+	public void testApproximateAgeIsNullWhileUsingDateOfBirth(){
+		victim.setUseDateOfBirth(false);
+		victim.setApproximateAge(45);
+		victim.setUseDateOfBirth(true);
+		
+		assertNull("approximate age should be null while using dateOfBirth", victim.getDateOfBirth());
+		
+		
+	}
     /**
      * Tests the getAssignedSocialID method of DisasterVictim.
      * The next victim should have an ID one higher than the previous victim.
@@ -111,6 +185,17 @@ public class DisasterVictimTest {
         victim.setGender(newGender);
         assertEquals("setGender should update and getGender should return the new gender", newGender.toLowerCase(), victim.getGender());
     }
+	
+	
+    /**
+     * Tests for invalid input for setting the gender
+     */
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetGenderWithInvalidInput(){
+		String newGender = "abc";
+        victim.setGender(newGender);
+		//Expecting an illegalArgumentException
+	}
 	
 	
     /**

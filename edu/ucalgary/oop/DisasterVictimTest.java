@@ -417,7 +417,30 @@ public class DisasterVictimTest {
 
         assertTrue("setPersonalBelongings should correctly update personal belongings", correct);
     }
-
+	
+	
+	 /**
+     * Test for userselection query handling
+     * should return the value of the attribute being searched for
+     */
+	@Test
+	public void testValidUserSelectionInput(){
+		String userInput = "First Name"; //this is considered correct format
+		String searchResult = victim.userSelection(userInput);
+		assertEquals("Search result should return the associated attribute", searchResult, victim.getFirstName());
+	}
+	/**
+     * Test for userselection query handling
+     * In the case of invalid input, the class should return null
+	 * to allow for the user interface to acknowledge the invalid input
+	 * and allow the user to try again, rather than just throwing an invalid argument exception
+     */
+	@Test
+	public void testInvalidUserSelctionInput(){
+		String userInput = "What is your favourite colour"; //this is consider incorrect format
+		String searchResult = victim.userSelection(userInput);
+		assertNull("Invalid Search result should return nothing", searchResult);
+	}
 
 }
 

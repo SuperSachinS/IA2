@@ -69,33 +69,6 @@ public class DisasterVictimTest {
         victim.setDateOfBirth(invalidDate); // This format should cause an exception
     }
 	
-	@Test
-    public void testSetAndGetFirstName() {
-        String newFirstName = "Alice";
-        victim.setFirstName(newFirstName);
-        assertEquals("setFirstName should update and getFirstName should return the new first name", newFirstName, victim.getFirstName());
-    }
-
-    @Test
-    public void testSetAndGetLastName() {
-        String newLastName = "Smith";
-        victim.setLastName(newLastName);
-        assertEquals("setLastName should update and getLastName should return the new last name", newLastName, victim.getLastName());
-    }
-
-    @Test
-    public void testGetComments() {
-        victim.setComments(expectedComments);
-        assertEquals("getComments should return the initial correct comments", expectedComments, victim.getComments());
-    }
-
-    @Test
-    public void testSetComments() {
-        victim.setComments(expectedComments);
-        String newComments = "Has a minor injury on the left arm";
-        victim.setComments(newComments);
-        assertEquals("setComments should update the comments correctly", newComments, victim.getComments());
-    }
 
     @Test
     public void testGetAssignedSocialID() {

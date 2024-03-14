@@ -10,7 +10,17 @@ import java.util.ArrayList;
  */
 public class SupplyItemTest {
     private SupplyItem expectedSupplyItem;
-
+	/*
+	• AVML - Asian vegetarian meal
+	• DBML - Diabetic meal
+	• GFML - Gluten intolerant meal
+	• KSML - Kosher meal
+	• LSML - Low salt meal
+	• MOML - Muslim meal
+	• PFML - Peanut-free meal
+	• VGML - Vegan meal
+	• VJML - Vegetarian Jain meal
+	*/
     /**
      * Setting up initial data for testing.
      */
@@ -119,4 +129,18 @@ public class SupplyItemTest {
         ArrayList<String> testedDietaryCodes = expectedSupplyItem.getDietaryCode();
         assertFalse("Dietary code AVML should be removed", testedDietaryCodes.contains("AVML"));
     }
+
+
+    /**
+     * Test for seeing that SupplyItem references the enumeration DietaryCodes
+	 * In correct behavior invalid dietaryCodes would be rejected/ignored
+     */
+	@Test
+	public void testEnumerationInvalidDietaryCode(){
+		SupplyItem invalidSupplyItem = new SupplyItem("car", 5, "ABCD");
+		ArrayList<String> testedDietaryCodes = invalidSupplyItem.getDietaryCode();
+		
+		AssertNull("SupplyItem should not assign invalid dietary codes based on the enumeration", testedDietaryCodes);
+	}
+
 }

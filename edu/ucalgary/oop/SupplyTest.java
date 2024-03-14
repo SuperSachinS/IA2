@@ -36,6 +36,17 @@ public class SupplyTest {
         supply = new Supply();
         supply.setSupplies(supplyItems);
     }
+    /**
+     * Test that constructor created an instance of the supply class.
+     */
+
+
+	@Test
+	public void testConstructor(){
+		assertnotNull("Constructor should create a non-null Supply object", supply);
+	}
+
+
 
     /**
      * Test for setting supplies.
@@ -104,4 +115,28 @@ public class SupplyTest {
 
         assertEquals("getSupply should return the expected supply item", supplyItems.get(0), newSupplyItems.get(0));
     }
+	
+	@Test
+	public void testAddSupplyWithNoDietaryCode(){
+
+		supply.addSupply("cylinder", 50);
+		
+		SupplyItem newSupplyItem = supply.getSupply("cylinder");
+		
+		assertEquals("addSupply should add the new supplyitem to its arraylist", newSupplyItem.getType(), "cylinder");
+		assertEquals("addSupply should add the new supplyitem to its arraylist", newSupplyItem.getQuantity(), 50);
+		
+	}
+	
+	@Test
+	public void testAddSupplyWithDietaryCode(){
+		supply.addSupply("cylinder", 50, "GFML");
+		
+		SupplyItem newSupplyItem = supply.getSupply("cylinder");
+
+		assertEquals("addSupply should add the new supplyitem to its arraylist", newSupplyItem.getType(), "cylinder");
+		assertEquals("addSupply should add the new supplyitem to its arraylist", newSupplyItem.getQuantity(), 50);
+		assertEquals("addSupply should add the new supplyitem to its arraylist", newSupplyItem.getDietaryCode(), "GFML");
+	}
+	
 }

@@ -41,4 +41,26 @@ public class InquirerTest {
         String expectedPhoneNum = inquirer.getServicesPhoneNum();
         assertEquals("getServicesPhoneNum should return the phone number", expectedPhoneNum, "403-846-9876");
     }   
+	 /**
+     * Test for userselection query handling
+     * should return the value of the attribute being searched for
+     */
+	@Test
+	public void testValidUserSelectionInput(){
+		String userInput = "Phone Number"; //this is considered correct format
+		String searchResult = inquirer.userSelection(userInput);
+		assertEquals("Search result should return the associated attribute", searchResult, inquirer.getServicesPhoneNum());
+	}
+	/**
+     * Test for userselection query handling
+     * In the case of invalid input, the class should return null
+	 * to allow for the user interface to acknowledge the invalid input
+	 * and allow the user to try again, rather than just throwing an invalid argument exception
+     */
+	@Test
+	public void testInvalidUserSelctionInput(){
+		String userInput = "What is your favourite colour"; //this is consider incorrect format
+		String searchResult = inquirer.userSelection(userInput);
+		assertNull("Invalid Search result should return nothing", searchResult);
+	}
 }
